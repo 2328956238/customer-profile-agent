@@ -9,6 +9,8 @@ import sqlite3
 import time
 from pathlib import Path
 
+from .outbox import OutboxMixin, create_schema, enqueue_handoff
+
 FIELDS = {
     "customer": {"name", "language"},
     "order": {"country", "freight", "quantity_mentioned", "quantity_total", "quantity_scope", "intent"},
@@ -20,6 +22,11 @@ REQUIRED = ("model", "qty")
 
 class Conflict(Exception):
     pass
+
+
+def validate_history_limit(limit):
+    if limit is not None and (type(limit) is not int or limit < 0):
+        raise ValueError('history limit must be a nonnegative integer or None')
 
 
 def blank():
@@ -118,7 +125,7 @@ def apply_patch(profile, operations, sources):
     return updated
 
 
-class Store:
+class Store(OutboxMixin):
     def __init__(self, path):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -127,7 +134,10 @@ class Store:
             CREATE TABLE IF NOT EXISTS profiles (cid TEXT PRIMARY KEY, revision INTEGER, body TEXT);
             CREATE TABLE IF NOT EXISTS turns (cid TEXT, mid TEXT, message TEXT, history TEXT,
               status TEXT, result TEXT, created REAL, PRIMARY KEY(cid,mid));
+            CREATE INDEX IF NOT EXISTS turns_done_history
+              ON turns(cid, created, mid) WHERE status='done';
             ''')
+            create_schema(db)
 
     def connect(self):
         return sqlite3.connect(self.path, timeout=10)
@@ -170,9 +180,28 @@ class Store:
         return None
 
     def finish_turn(self, cid, mid, result, status='done'):
+        """Commit the completed turn and its local delivery intent atomically.
+
+        Profile patches remain separately committed; this is not a transaction
+        spanning model calls. Completed results are immutable on replay.
+        """
         with self.connect() as db:
+            db.execute('BEGIN IMMEDIATE')
+            old = db.execute('SELECT status,result FROM turns WHERE cid=? AND mid=?', (cid, mid)).fetchone()
+            if old is None:
+                raise Conflict('cannot finish a turn that was not started')
+            if old[0] == 'done':
+                saved = json.loads(old[1])
+                strip_delivery = lambda row: {key: val for key, val in row.items() if key != 'delivery'}
+                if status != 'done' or strip_delivery(saved) != strip_delivery(result):
+                    raise Conflict('completed turn result is immutable')
+                return saved
+            persisted = copy.deepcopy(result)
+            if status == 'done':
+                persisted = enqueue_handoff(db, cid, mid, persisted, time.time())
             db.execute('UPDATE turns SET status=?,result=? WHERE cid=? AND mid=?',
-                       (status, json.dumps(result, ensure_ascii=False), cid, mid))
+                       (status, json.dumps(persisted, ensure_ascii=False), cid, mid))
+        return persisted
 
     def recover_turn(self, cid, mid):
         """Operator-only recovery after confirming the original worker has stopped."""
@@ -183,11 +212,29 @@ class Store:
                 (cid, mid))
             return cursor.rowcount == 1
 
-    def history(self, cid):
+    def history(self, cid, limit=None):
+        """Return completed messages oldest first; limit counts messages, not turns.
+
+        Omitted limits retain the full history. Equal timestamps are ordered by
+        message ID, so limited and full reads use the same deterministic order.
+        SQLite history retains an assistant entry even when its answer is empty.
+        """
+        validate_history_limit(limit)
+        if limit == 0:
+            return []
         with self.connect() as db:
-            rows = db.execute('SELECT mid,message,result FROM turns WHERE cid=? AND status="done" ORDER BY created', (cid,)).fetchall()
+            if limit is None:
+                rows = db.execute(
+                    "SELECT mid,message,result FROM turns WHERE cid=? AND status='done' ORDER BY created,mid",
+                    (cid,)).fetchall()
+            else:
+                # Each completed SQLite turn produces exactly two messages.
+                rows = db.execute(
+                    "SELECT mid,message,result FROM turns WHERE cid=? AND status='done' "
+                    'ORDER BY created DESC,mid DESC LIMIT ?', (cid, (limit + 1) // 2)).fetchall()
+                rows.reverse()
         out = []
         for mid, message, result in rows:
             out.extend([{'role': 'user', 'content': message, 'message_id': mid},
                         {'role': 'assistant', 'content': json.loads(result)['answer']}])
-        return out
+        return out if limit is None else out[-limit:]

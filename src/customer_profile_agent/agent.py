@@ -164,8 +164,8 @@ class ProfileAgent:
                     self._run(message, history, conversation_id, mid, trace), self.timeout)
                 result['latency_ms'] = round((time.monotonic() - started) * 1000)
                 result['tool_trace'] = trace
-                self.store.finish_turn(conversation_id, mid, result)
-                return result
+                persisted = self.store.finish_turn(conversation_id, mid, result)
+                return persisted if persisted is not None else result
             except Exception as exc:
                 # Never emit a model answer if persistence or validation failed.
                 result = {'answer': '', 'needs_human': False, 'issues': [type(exc).__name__],
@@ -175,7 +175,7 @@ class ProfileAgent:
                 return result
 
     async def _run(self, message, history, cid, mid, trace):
-        history = list(history or self.store.history(cid))[-40:]
+        history = list(history)[-40:] if history else self.store.history(cid, limit=40)
         sources, context = {}, []
         for index, row in enumerate(history):
             if row.get('role') not in ('user', 'assistant'):

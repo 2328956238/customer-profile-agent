@@ -7,10 +7,13 @@ import os
 import time
 from contextlib import contextmanager
 from pathlib import Path
-from .profile_store import blank, Conflict
+from .profile_store import blank, Conflict, validate_history_limit
 
 
 class FileStore:
+    # Keeps the original atomic per-customer JSON flow, without a delivery queue.
+    supports_outbox = False
+
     def __init__(self, path):
         self.path = Path(path)
         self.path.mkdir(parents=True, exist_ok=True)
@@ -86,15 +89,27 @@ class FileStore:
             self._write(cid, body)
             return True
 
-    def history(self, cid):
+    def history(self, cid, limit=None):
+        """Return the last limit messages, retaining the existing empty-answer rule.
+
+        This bounds message construction, not JSON file reads or sorting.
+        """
+        validate_history_limit(limit)
+        if limit == 0:
+            return []
         with self.transaction(cid) as body:
             out = []
-            for mid, row in sorted(body['turns'].items(), key=lambda kv: kv[1]['created']):
+            # Walk newest first: an empty assistant answer contributes only one
+            # message, so a fixed number of turns would truncate incorrectly.
+            for mid, row in sorted(body['turns'].items(),
+                                   key=lambda kv: (kv[1]['created'], kv[0]), reverse=True):
                 if row['status'] != 'done': continue
-                out.append(dict(role='user', content=row['message'], message_id=mid))
                 if row['result'].get('answer'):
                     out.append(dict(role='assistant', content=row['result']['answer']))
-            return out
+                out.append(dict(role='user', content=row['message'], message_id=mid))
+                if limit is not None and len(out) >= limit:
+                    break
+            return list(reversed(out if limit is None else out[:limit]))
 
     def profiles(self):
         for path in self.path.glob('*.json'):
