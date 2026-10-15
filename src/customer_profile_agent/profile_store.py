@@ -3,6 +3,7 @@
 The public demo contains only generic fields and synthetic examples.
 """
 import copy
+from contextlib import contextmanager
 import json
 import re
 import sqlite3
@@ -130,6 +131,7 @@ class Store(OutboxMixin):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.connect() as db:
+            db.execute('PRAGMA journal_mode=WAL')
             db.executescript('''
             CREATE TABLE IF NOT EXISTS profiles (cid TEXT PRIMARY KEY, revision INTEGER, body TEXT);
             CREATE TABLE IF NOT EXISTS turns (cid TEXT, mid TEXT, message TEXT, history TEXT,
@@ -139,8 +141,37 @@ class Store(OutboxMixin):
             ''')
             create_schema(db)
 
+    @contextmanager
     def connect(self):
-        return sqlite3.connect(self.path, timeout=10)
+        db = sqlite3.connect(self.path, timeout=5)
+        db.execute('PRAGMA foreign_keys=ON')
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
+
+    def turn_page(self, cid, limit=20, before=None):
+        """Keyset pagination using the same partial composite index as history."""
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError('limit must be 1..100')
+        params = [cid]
+        boundary = ''
+        if before is not None:
+            import math
+            if (not isinstance(before, (list, tuple)) or len(before) != 2
+                    or type(before[0]) not in (int, float) or abs(before[0]) > 10**15 or not math.isfinite(before[0])
+                    or not isinstance(before[1], str) or not 1 <= len(before[1]) <= 100):
+                raise ValueError('invalid history cursor')
+            boundary = ' AND (created,mid)<(?,?)'
+            params.extend(before)
+        params.append(limit + 1)
+        with self.connect() as db:
+            rows = db.execute("SELECT mid,message,result,created FROM turns WHERE cid=? AND status='done'" +
+                              boundary + ' ORDER BY created DESC,mid DESC LIMIT ?', params).fetchall()
+        return {'items': [{'message_id': mid, 'message': message, 'answer': json.loads(result)['answer'],
+                           'created': created} for mid,message,result,created in rows[:limit]],
+                'next_cursor': [rows[limit-1][3], rows[limit-1][0]] if len(rows) > limit else None}
 
     def load(self, cid):
         with self.connect() as db:

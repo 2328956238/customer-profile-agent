@@ -128,7 +128,8 @@ def test_concurrent_tenant_pairs_have_distinct_storage_locks_and_history(store):
     asyncio.run(run())
     keys = [scoped_customer_id(*pair) for pair in pairs]
     assert len(set(keys)) == 2
-    assert set(app.state.agent.locks) == set(keys)
+    # Customer isolation was checked above; idle locks are now reclaimed.
+    assert app.state.agent.locks == {}
     assert [store.load(key)['revision'] for key in keys] == [2, 2]
     assert [store.history(key)[0]['content'] for key in keys] == [EXAMPLES[0], 'fictional other tenant']
 

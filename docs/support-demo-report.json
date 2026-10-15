@@ -1,0 +1,32 @@
+{
+  "synthetic": true,
+  "offline": true,
+  "checks": {
+    "versioned_knowledge_citation": true,
+    "three_turn_profile_and_correction": true,
+    "advisory_ml_classification": true,
+    "viewer_write_denied": true,
+    "token_revocation": true,
+    "trace_audit_correlation": true,
+    "external_delivery": false
+  },
+  "lead_example": {
+    "label": "high",
+    "model_score": 0.9777967712517855,
+    "scores": {
+      "low": 0.0001368457774659685,
+      "medium": 0.022066382970748373,
+      "high": 0.9777967712517855
+    },
+    "calibrated": false,
+    "advisory_only": true,
+    "explanation": "分数是合成标注意向类别的未校准模型分数，不是成交概率；仅供客服安排查看优先级，不替代人工判断、客户转人工请求或业务交接规则。"
+  },
+  "trace_count": 7,
+  "audit_count": 10,
+  "limitations": [
+    "No real model, customer data, shipping or sales messages were used.",
+    "Classification is trained on synthetic data; scores are not conversion probabilities.",
+    "Knowledge answer is a validated excerpt, not a semantic-correctness guarantee."
+  ]
+}

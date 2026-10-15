@@ -7,6 +7,8 @@ import time
 
 from .policy import DEMO_POLICY, requirements
 from .profile_store import Conflict, FIELDS, apply_patch
+from .concurrency import CustomerLocks
+from .telemetry import current_trace
 
 
 PROMPT = '''You are a product-inquiry assistant in a fictional engineering demo.
@@ -148,31 +150,45 @@ class ProfileAgent:
     def __init__(self, store, provider, timeout=60, max_steps=10):
         self.store, self.provider = store, provider
         self.timeout, self.max_steps = timeout, max_steps
-        self.locks = {}
+        self._customer_locks = CustomerLocks()
+        self.locks = self._customer_locks.entries
 
     async def get_reply(self, message, history, conversation_id, known_context=None):
         mid = (known_context or {}).get('_message_id')
         if not mid:
             raise ValueError('a stable message ID is required for idempotency')
-        async with self.locks.setdefault(conversation_id, asyncio.Lock()):
-            cached = self.store.begin_turn(conversation_id, mid, message, history)
-            if cached is not None:
-                return cached
-            started, trace = time.monotonic(), []
-            try:
-                result = await asyncio.wait_for(
-                    self._run(message, history, conversation_id, mid, trace), self.timeout)
-                result['latency_ms'] = round((time.monotonic() - started) * 1000)
-                result['tool_trace'] = trace
-                persisted = self.store.finish_turn(conversation_id, mid, result)
-                return persisted if persisted is not None else result
-            except Exception as exc:
-                # Never emit a model answer if persistence or validation failed.
-                result = {'answer': '', 'needs_human': False, 'issues': [type(exc).__name__],
-                          'retryable': True, 'send_plan': {'split_messages': []}, 'tool_trace': trace,
-                          'latency_ms': round((time.monotonic() - started) * 1000)}
-                self.store.finish_turn(conversation_id, mid, result, 'failed')
-                return result
+        started_wait = time.monotonic()
+        try:
+            async with self._customer_locks.hold(conversation_id, self.timeout):
+                remaining = max(0.001, self.timeout - (time.monotonic() - started_wait))
+                return await self._get_reply_locked(message, history, conversation_id, mid, remaining)
+        except TimeoutError:
+            return {'answer': '', 'needs_human': False, 'issues': ['LockTimeout'],
+                    'retryable': True, 'send_plan': {'split_messages': []}, 'tool_trace': []}
+
+    async def _get_reply_locked(self, message, history, conversation_id, mid, remaining):
+        cached = self.store.begin_turn(conversation_id, mid, message, history)
+        if cached is not None:
+            return cached
+        started, trace = time.monotonic(), []
+        try:
+            result = await asyncio.wait_for(
+                self._run(message, history, conversation_id, mid, trace), remaining)
+            result['latency_ms'] = round((time.monotonic() - started) * 1000)
+            result['tool_trace'] = trace
+            persisted = self.store.finish_turn(conversation_id, mid, result)
+            return persisted if persisted is not None else result
+        except asyncio.CancelledError:
+            self.store.finish_turn(conversation_id, mid, {'answer': '', 'retryable': True,
+                                   'issues': ['CancelledError']}, 'failed')
+            raise
+        except Exception as exc:
+            # Never emit a model answer if persistence or validation failed.
+            result = {'answer': '', 'needs_human': False, 'issues': [type(exc).__name__],
+                      'retryable': True, 'send_plan': {'split_messages': []}, 'tool_trace': trace,
+                      'latency_ms': round((time.monotonic() - started) * 1000)}
+            self.store.finish_turn(conversation_id, mid, result, 'failed')
+            return result
 
     async def _run(self, message, history, cid, mid, trace):
         history = list(history)[-40:] if history else self.store.history(cid, limit=40)
@@ -201,6 +217,8 @@ class ProfileAgent:
                 continue
             for call in calls:
                 name = call['function']['name']
+                tool_started = time.monotonic()
+                tool_ok = False
                 try:
                     args = json.loads(call['function']['arguments'])
                     profile = self.store.load(cid)
@@ -233,6 +251,7 @@ class ProfileAgent:
                             'kind': args['action'], 'text': args['answer']} if selected else None)
                         profile = self.store.save(cid, profile, profile['revision'])
                         trace.append({'tool': name, 'arguments': args, 'ok': True})
+                        tool_ok = True
                         return {'answer': args['answer'], 'action': args['action'],
                                 'needs_human': args['action'] in ('handoff', 'escalate'),
                                 'issues': [], 'profile': profile, 'state_revision': profile['revision'],
@@ -242,9 +261,14 @@ class ProfileAgent:
                     else:
                         raise ValueError('unknown tool')
                     trace.append({'tool': name, 'arguments': args, 'ok': True})
+                    tool_ok = True
                 except (ValueError, KeyError, TypeError, Conflict) as exc:
                     output = {'error': str(exc), 'saved': view(self.store.load(cid))}
                     trace.append({'tool': name, 'ok': False, 'error': str(exc)})
+                finally:
+                    observation = current_trace.get()
+                    if observation is not None:
+                        observation.tool(name, (time.monotonic() - tool_started) * 1000, tool_ok)
                 messages.append({'role': 'tool', 'tool_call_id': call['id'],
                                  'content': json.dumps(output, ensure_ascii=False)})
         raise RuntimeError('agent tool turn limit exceeded')

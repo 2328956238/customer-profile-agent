@@ -1,0 +1,397 @@
+{
+  "dataset": {
+    "classes": 3,
+    "groups": 144,
+    "samples": 288,
+    "synthetic": true
+  },
+  "dataset_sha256": "adeb6af12996e746d9a8d3c2760f08eb042849d23c1c24edfe645ce80a07d613",
+  "feature_names": [
+    "message_count",
+    "specified_attribute_count",
+    "requested_quantity",
+    "has_destination",
+    "asks_price",
+    "asks_shipping",
+    "has_purchase_timeframe"
+  ],
+  "label_definitions": {
+    "high": "合成场景：较具体的近期采购询盘，建议优先查看",
+    "low": "合成场景：初步了解产品，需求尚不具体",
+    "medium": "合成场景：比较规格与条件，需求逐渐具体"
+  },
+  "label_order": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "limitations": [
+    "All labels and features come from shared synthetic scenario recipes; this is not an independent real-customer test.",
+    "Group separation prevents same-customer snapshot leakage, not scenario-template bias or future distribution shift.",
+    "No sales, payment, follow-up, handoff outcome, identity or customer_id enters the feature matrix.",
+    "Scores are uncalibrated class scores, not conversion probabilities. No production quality claim is supported.",
+    "This auxiliary score must never gate a customer request for a human or override deterministic handoff rules."
+  ],
+  "model_parameters": {
+    "dummy_most_frequent": {
+      "strategy": "most_frequent"
+    },
+    "logistic_regression": {
+      "C": 1.0,
+      "max_iter": 1000,
+      "random_state": 4139,
+      "solver": "lbfgs"
+    },
+    "random_forest": {
+      "max_depth": 4,
+      "max_features": "sqrt",
+      "min_samples_leaf": 4,
+      "n_estimators": 100,
+      "n_jobs": 1,
+      "random_state": 4139
+    }
+  },
+  "models": {
+    "dummy_most_frequent": {
+      "accuracy": 0.27777778,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          28
+        ],
+        [
+          0,
+          0,
+          24
+        ],
+        [
+          0,
+          0,
+          20
+        ]
+      ],
+      "macro_f1": 0.14492754,
+      "per_class": {
+        "high": {
+          "f1": 0.43478261,
+          "precision": 0.27777778,
+          "recall": 1.0,
+          "support": 20
+        },
+        "low": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 28
+        },
+        "medium": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 24
+        }
+      }
+    },
+    "logistic_regression": {
+      "accuracy": 0.70833333,
+      "confusion_matrix": [
+        [
+          22,
+          6,
+          0
+        ],
+        [
+          5,
+          13,
+          6
+        ],
+        [
+          1,
+          3,
+          16
+        ]
+      ],
+      "macro_f1": 0.70427881,
+      "per_class": {
+        "high": {
+          "f1": 0.76190476,
+          "precision": 0.72727273,
+          "recall": 0.8,
+          "support": 20
+        },
+        "low": {
+          "f1": 0.78571429,
+          "precision": 0.78571429,
+          "recall": 0.78571429,
+          "support": 28
+        },
+        "medium": {
+          "f1": 0.56521739,
+          "precision": 0.59090909,
+          "recall": 0.54166667,
+          "support": 24
+        }
+      }
+    },
+    "random_forest": {
+      "accuracy": 0.68055556,
+      "confusion_matrix": [
+        [
+          21,
+          7,
+          0
+        ],
+        [
+          7,
+          11,
+          6
+        ],
+        [
+          0,
+          3,
+          17
+        ]
+      ],
+      "macro_f1": 0.67652885,
+      "per_class": {
+        "high": {
+          "f1": 0.79069767,
+          "precision": 0.73913043,
+          "recall": 0.85,
+          "support": 20
+        },
+        "low": {
+          "f1": 0.75,
+          "precision": 0.75,
+          "recall": 0.75,
+          "support": 28
+        },
+        "medium": {
+          "f1": 0.48888889,
+          "precision": 0.52380952,
+          "recall": 0.45833333,
+          "support": 24
+        }
+      }
+    }
+  },
+  "preprocessing": {
+    "log1p": [
+      "message_count",
+      "requested_quantity"
+    ],
+    "mean": [
+      2.0784926973466535,
+      2.0694444444444446,
+      2.209489269980328,
+      0.5277777777777778,
+      0.7592592592592593,
+      0.5185185185185185,
+      0.44907407407407407
+    ],
+    "scale": [
+      0.47649625933582845,
+      1.336728893905742,
+      1.720048841867271,
+      0.4992277987669844,
+      0.42753319928204414,
+      0.4996569467863719,
+      0.49739978897119297
+    ],
+    "scaler_fit_scope": "training_groups_only"
+  },
+  "schema_version": 1,
+  "scope": "2026-10-15 公开脱敏展示版新增；仅合成数据离线分类实验，不是生产业绩或成交概率验证。",
+  "selection_policy": "Chosen before holdout evaluation; no tuning or model selection on holdout.",
+  "serving_model": "logistic_regression",
+  "split": {
+    "group_field": "customer_id",
+    "group_overlap": [],
+    "holdout": {
+      "class_counts": {
+        "high": 20,
+        "low": 28,
+        "medium": 24
+      },
+      "class_group_counts": {
+        "high": 10,
+        "low": 14,
+        "medium": 12
+      },
+      "customer_ids": [
+        "demo-customer-009",
+        "demo-customer-015",
+        "demo-customer-017",
+        "demo-customer-021",
+        "demo-customer-026",
+        "demo-customer-034",
+        "demo-customer-036",
+        "demo-customer-037",
+        "demo-customer-038",
+        "demo-customer-040",
+        "demo-customer-043",
+        "demo-customer-063",
+        "demo-customer-064",
+        "demo-customer-065",
+        "demo-customer-071",
+        "demo-customer-073",
+        "demo-customer-076",
+        "demo-customer-086",
+        "demo-customer-088",
+        "demo-customer-092",
+        "demo-customer-094",
+        "demo-customer-095",
+        "demo-customer-103",
+        "demo-customer-110",
+        "demo-customer-112",
+        "demo-customer-117",
+        "demo-customer-119",
+        "demo-customer-123",
+        "demo-customer-124",
+        "demo-customer-125",
+        "demo-customer-126",
+        "demo-customer-132",
+        "demo-customer-133",
+        "demo-customer-138",
+        "demo-customer-142",
+        "demo-customer-143"
+      ],
+      "groups": 36,
+      "samples": 72
+    },
+    "holdout_fraction": 0.25,
+    "method": "GroupShuffleSplit",
+    "seed": 4107,
+    "train": {
+      "class_counts": {
+        "high": 76,
+        "low": 68,
+        "medium": 72
+      },
+      "class_group_counts": {
+        "high": 38,
+        "low": 34,
+        "medium": 36
+      },
+      "customer_ids": [
+        "demo-customer-001",
+        "demo-customer-002",
+        "demo-customer-003",
+        "demo-customer-004",
+        "demo-customer-005",
+        "demo-customer-006",
+        "demo-customer-007",
+        "demo-customer-008",
+        "demo-customer-010",
+        "demo-customer-011",
+        "demo-customer-012",
+        "demo-customer-013",
+        "demo-customer-014",
+        "demo-customer-016",
+        "demo-customer-018",
+        "demo-customer-019",
+        "demo-customer-020",
+        "demo-customer-022",
+        "demo-customer-023",
+        "demo-customer-024",
+        "demo-customer-025",
+        "demo-customer-027",
+        "demo-customer-028",
+        "demo-customer-029",
+        "demo-customer-030",
+        "demo-customer-031",
+        "demo-customer-032",
+        "demo-customer-033",
+        "demo-customer-035",
+        "demo-customer-039",
+        "demo-customer-041",
+        "demo-customer-042",
+        "demo-customer-044",
+        "demo-customer-045",
+        "demo-customer-046",
+        "demo-customer-047",
+        "demo-customer-048",
+        "demo-customer-049",
+        "demo-customer-050",
+        "demo-customer-051",
+        "demo-customer-052",
+        "demo-customer-053",
+        "demo-customer-054",
+        "demo-customer-055",
+        "demo-customer-056",
+        "demo-customer-057",
+        "demo-customer-058",
+        "demo-customer-059",
+        "demo-customer-060",
+        "demo-customer-061",
+        "demo-customer-062",
+        "demo-customer-066",
+        "demo-customer-067",
+        "demo-customer-068",
+        "demo-customer-069",
+        "demo-customer-070",
+        "demo-customer-072",
+        "demo-customer-074",
+        "demo-customer-075",
+        "demo-customer-077",
+        "demo-customer-078",
+        "demo-customer-079",
+        "demo-customer-080",
+        "demo-customer-081",
+        "demo-customer-082",
+        "demo-customer-083",
+        "demo-customer-084",
+        "demo-customer-085",
+        "demo-customer-087",
+        "demo-customer-089",
+        "demo-customer-090",
+        "demo-customer-091",
+        "demo-customer-093",
+        "demo-customer-096",
+        "demo-customer-097",
+        "demo-customer-098",
+        "demo-customer-099",
+        "demo-customer-100",
+        "demo-customer-101",
+        "demo-customer-102",
+        "demo-customer-104",
+        "demo-customer-105",
+        "demo-customer-106",
+        "demo-customer-107",
+        "demo-customer-108",
+        "demo-customer-109",
+        "demo-customer-111",
+        "demo-customer-113",
+        "demo-customer-114",
+        "demo-customer-115",
+        "demo-customer-116",
+        "demo-customer-118",
+        "demo-customer-120",
+        "demo-customer-121",
+        "demo-customer-122",
+        "demo-customer-127",
+        "demo-customer-128",
+        "demo-customer-129",
+        "demo-customer-130",
+        "demo-customer-131",
+        "demo-customer-134",
+        "demo-customer-135",
+        "demo-customer-136",
+        "demo-customer-137",
+        "demo-customer-139",
+        "demo-customer-140",
+        "demo-customer-141",
+        "demo-customer-144"
+      ],
+      "groups": 108,
+      "samples": 216
+    }
+  },
+  "versions": {
+    "numpy": "2.5.4",
+    "python": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1"
+  }
+}

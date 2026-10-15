@@ -1,0 +1,58 @@
+{
+  "name": "fictional-support-knowledge-v1",
+  "synthetic": true,
+  "description": "Handwritten fictional documents and labelled queries. Includes a deliberate lexical false-positive challenge; no real customers or LLM judge.",
+  "documents": [
+    {
+      "tenant_id": "demo-shop",
+      "doc_id": "delivery-policy",
+      "version": "2026-10-v1",
+      "title": "Fictional delivery policy",
+      "text": "Standard shipping takes four working days after dispatch. Express shipping takes two working days. Tracking becomes available after the fictional carrier collects the parcel.\n\n标准配送：发出后四个工作日送达。加急配送：发出后两个工作日送达。承运方取件后提供物流追踪编号。"
+    },
+    {
+      "tenant_id": "demo-shop",
+      "doc_id": "returns-policy",
+      "version": "2026-10-v1",
+      "title": "Fictional returns and refunds",
+      "text": "Unopened items may be returned within fourteen calendar days. Refunds are processed within five working days after return inspection. Keep the return receipt for tracking.\n\n退货窗口：未拆封商品可在十四个自然日内申请退货。退货检查完成后五个工作日内处理退款。"
+    },
+    {
+      "tenant_id": "demo-shop",
+      "doc_id": "warranty-policy",
+      "version": "2026-10-v1",
+      "title": "Fictional warranty policy",
+      "text": "The demonstration warranty covers manufacturing defects for twelve months. A purchase receipt is required for a warranty claim. Accidental damage is excluded.\n\n保修期限：制造缺陷保修十二个月。申请保修需提供购买凭证；意外损坏不在此示例保修范围。"
+    },
+    {
+      "tenant_id": "demo-shop",
+      "doc_id": "privacy-policy",
+      "version": "2026-10-v1",
+      "title": "Fictional privacy policy",
+      "text": "To request deletion of demonstration account data, contact the fictional privacy team. The privacy team confirms the request before deleting data. This document does not authorise the assistant to delete an account.\n\n数据删除：请联系示例隐私团队，核实请求后处理账号数据删除。本文档不授予助手删除账号的权限。"
+    },
+    {
+      "tenant_id": "other-shop",
+      "doc_id": "delivery-policy",
+      "version": "2026-10-v1",
+      "title": "Other fictional shop delivery",
+      "text": "Standard shipping takes eleven working days. The other shop offers a fictional violet-orbit courier option. These terms belong only to the other shop."
+    }
+  ],
+  "cases": [
+    {"id": "shipping-en", "tenant_id": "demo-shop", "query": "standard shipping dispatch", "expected_doc_ids": ["delivery-policy"]},
+    {"id": "shipping-zh", "tenant_id": "demo-shop", "query": "加急配送工作日", "expected_doc_ids": ["delivery-policy"]},
+    {"id": "return-en", "tenant_id": "demo-shop", "query": "unopened items returned", "expected_doc_ids": ["returns-policy"]},
+    {"id": "return-zh", "tenant_id": "demo-shop", "query": "退货窗口", "expected_doc_ids": ["returns-policy"]},
+    {"id": "refund-en", "tenant_id": "demo-shop", "query": "refund inspection", "expected_doc_ids": ["returns-policy"]},
+    {"id": "warranty-en", "tenant_id": "demo-shop", "query": "manufacturing defects warranty", "expected_doc_ids": ["warranty-policy"]},
+    {"id": "warranty-zh", "tenant_id": "demo-shop", "query": "保修期限购买凭证", "expected_doc_ids": ["warranty-policy"]},
+    {"id": "privacy-en", "tenant_id": "demo-shop", "query": "privacy account deletion", "expected_doc_ids": ["privacy-policy"]},
+    {"id": "multi-document", "tenant_id": "demo-shop", "query": "shipping warranty", "expected_doc_ids": ["delivery-policy", "warranty-policy"]},
+    {"id": "same-doc-other-tenant", "tenant_id": "other-shop", "query": "standard shipping", "expected_doc_ids": ["delivery-policy"]},
+    {"id": "no-evidence", "tenant_id": "demo-shop", "query": "cryptocurrency exchange rates", "expected_doc_ids": []},
+    {"id": "other-tenant-only", "tenant_id": "demo-shop", "query": "violet orbit courier", "expected_doc_ids": []},
+    {"id": "unknown-tenant", "tenant_id": "missing-shop", "query": "warranty", "expected_doc_ids": []},
+    {"id": "lexical-false-positive-challenge", "tenant_id": "demo-shop", "query": "Does warranty include interplanetary insurance?", "expected_doc_ids": []}
+  ]
+}

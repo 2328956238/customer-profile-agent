@@ -1,0 +1,187 @@
+{
+  "dataset_sha256": "1a4dfcae4d5479a51da570f30b21ed3af14dcdd271a1d6db7b16637a7fd20624",
+  "synthetic": true,
+  "method": "bm25",
+  "top_k": 3,
+  "scope": "synthetic lexical retrieval and extractive citation checks; no LLM accuracy measurement",
+  "counts": {
+    "cases": 14,
+    "answerable_cases": 10,
+    "no_evidence_cases": 4,
+    "relevant_documents": 11,
+    "retrieved_relevant_documents": 11,
+    "hit_cases": 10,
+    "correct_abstentions": 3,
+    "answered_cases": 11,
+    "citations": 11,
+    "valid_current_citations": 11,
+    "label_relevant_citations": 10
+  },
+  "metrics": {
+    "recall_at_k": 1.0,
+    "hit_at_k": 1.0,
+    "mrr_at_k": 1.0,
+    "abstention_accuracy": 0.75,
+    "current_citation_validity": 1.0,
+    "labelled_citation_precision": 0.909091
+  },
+  "cases": [
+    {
+      "id": "shipping-en",
+      "expected_doc_ids": [
+        "delivery-policy"
+      ],
+      "retrieved_doc_ids": [
+        "delivery-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "shipping-zh",
+      "expected_doc_ids": [
+        "delivery-policy"
+      ],
+      "retrieved_doc_ids": [
+        "delivery-policy",
+        "returns-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "return-en",
+      "expected_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieved_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "return-zh",
+      "expected_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieved_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "refund-en",
+      "expected_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieved_doc_ids": [
+        "returns-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "warranty-en",
+      "expected_doc_ids": [
+        "warranty-policy"
+      ],
+      "retrieved_doc_ids": [
+        "warranty-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "warranty-zh",
+      "expected_doc_ids": [
+        "warranty-policy"
+      ],
+      "retrieved_doc_ids": [
+        "warranty-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "privacy-en",
+      "expected_doc_ids": [
+        "privacy-policy"
+      ],
+      "retrieved_doc_ids": [
+        "privacy-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "multi-document",
+      "expected_doc_ids": [
+        "delivery-policy",
+        "warranty-policy"
+      ],
+      "retrieved_doc_ids": [
+        "warranty-policy",
+        "delivery-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "same-doc-other-tenant",
+      "expected_doc_ids": [
+        "delivery-policy"
+      ],
+      "retrieved_doc_ids": [
+        "delivery-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    },
+    {
+      "id": "no-evidence",
+      "expected_doc_ids": [],
+      "retrieved_doc_ids": [],
+      "retrieval_status": "abstain",
+      "answer_status": "abstain",
+      "citation_count": 0
+    },
+    {
+      "id": "other-tenant-only",
+      "expected_doc_ids": [],
+      "retrieved_doc_ids": [],
+      "retrieval_status": "abstain",
+      "answer_status": "abstain",
+      "citation_count": 0
+    },
+    {
+      "id": "unknown-tenant",
+      "expected_doc_ids": [],
+      "retrieved_doc_ids": [],
+      "retrieval_status": "abstain",
+      "answer_status": "abstain",
+      "citation_count": 0
+    },
+    {
+      "id": "lexical-false-positive-challenge",
+      "expected_doc_ids": [],
+      "retrieved_doc_ids": [
+        "warranty-policy"
+      ],
+      "retrieval_status": "matched",
+      "answer_status": "answered",
+      "citation_count": 1
+    }
+  ]
+}

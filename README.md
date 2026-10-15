@@ -1,199 +1,115 @@
-# Customer Profile Agent
+# 多渠道智能客服工程展示
 
-**把对话中的客户需求，变成可追溯、可纠正、可持久化的结构化画像。**
+从实际客户接待项目的画像与对话核心整理出的脱敏作品，新增知识库检索式问答、询盘意向分类、个人角色权限与审计、AI评测工具、调用计量和有界并发。所有新功能使用虚构数据在本机验证，未部署到原业务系统。
 
-这是从实际客户接待项目的 Function Calling Agent 核心整理出的**脱敏工程展示版**。重点是可靠的数据写入与多轮状态管理。新增了独立 FastAPI 入口、离线演示和 CI，便于在本机运行和查看代码。
+默认不调用模型、不发送客户消息、不写入真实CRM。公开仓库提供核心API和可复现演示；原业务网站、WhatsApp适配器、人工坐席页面、实际商品价格和客户资料不在仓库内。
 
-所有示例均为虚构数据。原业务的品牌、客户会话、物流地点、费率、账号配置与平台集成不在此仓库中；这里使用通用产品询盘规则。
+## 一条命令验证完整流程
 
-## 解决的问题
+需要 Python 3.11+，首次安装依赖需要联网。激活虚拟环境后运行：
 
-客户可能先说型号，下一轮补数量，再改口。仅靠聊天记录让模型生成一整份 JSON，容易覆盖旧需求、错配数量，或在保存失败时仍回复“已记录”。本项目把模型的建议与最终存储分开：
-
-| 机制 | 实现与作用 |
-| --- | --- |
-| 原文证据 | 每项变更携带 `source_id` 与 `quote`，工具验证引用确实来自客户原文 |
-| 增量更新 | 字段白名单与类型检查；整批 patch 校验通过后才写入，保留旧值审计 |
-| 版本控制 | `expected_revision` + 存储事务，拒绝陈旧画像覆盖新版本 |
-| 事件幂等 | 同一客户的 `message_id` 重试返回已保存结果；同 ID 不同正文拒绝执行 |
-| 模型工具闭环 | `update_profile` → 读取持久化结果 → 单独 `finish_turn`，回复必须使用最新版本 |
-| 追问约束 | 由当前缺失／歧义字段生成允许的 `question_id`，避免重复询问已确认字段 |
-| 范围与修正 | 显式共享规格可继承；单项覆盖、数量歧义、取消产品保留审计记录 |
-| 持久化与恢复 | 默认 SQLite；另提供带文件锁、`fsync` 和原子替换的文件存储实现 |
-| 可选租户隔离 | 显式配置静态 Bearer 凭证后，API 按凭证确定租户；画像、历史、事件重放及进程内锁共用租户命名空间 |
-| 本地交付闭环 | SQLite 同事务提交已完成回合与 Outbox 事件；离线 Dispatcher 演示租约领取、有限重试、确认 fencing 与虚构接收端去重（2026-10-14 展示版新增） |
-
-## 5 分钟运行
-
-需要 Python 3.11+。以下演示无需模型账号、API Key 或外部服务。首次安装依赖需要联网；安装后 mock 演示和测试可离线运行。
-
-```bash
-git clone https://github.com/2328956238/customer-profile-agent.git
-cd customer-profile-agent
+~~~bash
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev]'
+python -m customer_profile_agent.support_demo
+~~~
 
-# 运行三个固定的虚构对话，再重试同一事件
-python -m customer_profile_agent.demo
+演示在临时数据库中初始化三种角色，发布虚构物流政策，回答带引用的问题，完成三轮画像采集与数量纠正，调用意向分类，验证查看员写入被拒绝、审计与追踪关联，以及令牌撤销。程序禁止 socket 连接，不打印令牌，不保留临时业务库。交付对象仍为虚构本地接收端，external_delivery=false。
 
-# 离线演示：摘要接收成功后退出，重启重发，相同事件只保存一份回执
-python -m customer_profile_agent.outbox_demo
+本机查看API：
 
-# 启动本地 API
+~~~bash
 uvicorn customer_profile_agent.api:create_app --factory --host localhost --port 8000 --workers 1
-```
+~~~
 
-浏览器打开 [交互式 API 文档](http://localhost:8000/docs)。默认数据保存至 `data/profiles.sqlite3`，该目录不会提交到 Git。未设置 `PROFILE_AUTH_TOKENS` 时是**无认证的本机演示模式**，仅按上述命令监听 localhost；`/health` 会明确显示 `local-demo-unprotected`。
+打开 [API交互文档](http://localhost:8000/docs)。默认是无认证的本机演示模式，/health 显示 local-demo-unprotected。PROFILE_ACCESS_MODE=rbac 启用个人令牌与角色授权；先由可信本地运维初始化身份，详见[权限与审计](docs/security.md)。API不会自动加载.env文件。
 
-离线演示依次执行：
+## 实现范围
 
-1. `我想了解 Device Alpha，128GB。` → 保存型号与容量，追问数量。
-2. `先要 12 台，目的地是示例国 A，我有货代。` → 补齐询盘信息，生成本地摘要。
-3. `数量改成 18 台。` → 更新为 18 台，审计记录仍能看到原来的 12 台。
+| 模块 | 当前实现 | 可验证的边界 |
+| --- | --- | --- |
+| 多轮画像 | Function Calling、逐字段原文证据、原子patch、修订版本、消息幂等 | 事实持久化后才允许完成回复；不会把模型建议直接当业务事实 |
+| 知识库问答 | 文档版本和分块、BM25、稀疏TF-IDF余弦、RRF混合、来源校验 | 按租户预过滤；更新/删除撤销旧引用；默认回答为严格摘录，不是稠密语义检索 |
+| 机器学习 | scikit-learn逻辑回归、随机森林、Dummy基线；按客户分组留出 | 只用决策前特征；JSON系数推理；分数未校准，不是成交概率 |
+| RBAC | viewer/agent/admin，个人opaque令牌，服务端身份与租户，实时撤销 | 请求自报角色和租户不能选择身份；没有JWT、SSO或密码登录 |
+| 操作审计 | 操作者、动作、opaque资源ID、attempt及结果、trace_id关联 | 不存正文/凭证；意图与结果记录和业务写入不是同一事务，不是防篡改账本 |
+| 观测与预算 | 请求及模型/工具span、实际usage、失败尝试、Token和费用预算 | 缺usage的费用保持未知；已知费用下界仍能阻止后续调用；费率由运维提供 |
+| 并发与数据库 | SQLite WAL、CAS、局部组合索引、keyset历史分页、全局/租户限额 | 单进程有界执行；锁等待纳入超时并回收；不宣称多实例分布式协调 |
+| 本地交付 | SQLite完成回合与Outbox同事务，领取租约、有限重试、fencing、接收端去重 | 至少一次尝试，不保证外部exactly-once；不向真实销售发送 |
 
-最终画像为 `revision=6`：每轮事实 patch 一次、完成回复时状态保存一次。重试第三条消息返回原结果，版本保持 6。
+本项目没有为了展示技术名称引入微服务、Kubernetes或独立队列平台。新增功能都在同一套API、身份和SQLite数据库内集成。
 
-**MockProvider 是固定场景脚本，不具备任意自然语言理解能力。** 它模拟模型的工具决策，执行真实的 Agent、校验器和存储代码。未知输入会明确提示使用示例句子，不猜测客户事实。
+## 已运行的评测
 
-## API 示例
+所有数据均为合成或固定脚本，指标不能替代真实客户及真实模型评估。
 
-```bash
-curl -s http://localhost:8000/profiles/demo-customer/turns \
-  -H 'Content-Type: application/json' \
-  -d '{"message_id":"m1","message":"我想了解 Device Alpha，128GB。"}'
+- **分类**：288条快照、144个虚构客户；训练216条/108组，留出72条/36组，客户组无交叉。LogisticRegression Macro F1 **0.7043**，Dummy **0.1449**，RandomForest **0.6765**。保留中间类别表现不足的结果，未调种子挑选留出成绩。完整环境、数据哈希、混淆矩阵见[机器学习报告](fixtures/leads/demo-report.json)和[训练说明](docs/lead-scoring.md)。
+- **检索**：固定15个问题中，相关文档Recall@3为11/11，无依据拒答3/4，标注文档引用相关10/11。保留词法误召回负例；引用存在并不能证明文档与问题相关。见[原始检索评测](fixtures/knowledge/bm25-evaluation.json)和[知识库说明](docs/knowledge.md)。
+- **Agent评测工具**：含8个场景/11轮的合成标注。默认Mock仅执行支持的1个场景/3轮，其余7场景/8轮明确skipped；没有运行真实LLM，不能报告真实模型准确率。显式--live才允许使用配置的兼容服务。见[评测说明](docs/evaluation.md)。
 
-curl -s http://localhost:8000/profiles/demo-customer/turns \
-  -H 'Content-Type: application/json' \
-  -d '{"message_id":"m2","message":"先要 12 台，目的地是示例国 A，我有货代。"}'
+复现：
 
-curl -s http://localhost:8000/profiles/demo-customer/turns \
-  -H 'Content-Type: application/json' \
-  -d '{"message_id":"m3","message":"数量改成 18 台。"}'
-
-curl -s http://localhost:8000/profiles/demo-customer
-```
-
-重复发送完全相同的 `m3` 请求即可验证幂等。把 `m3` 的正文改成其他内容，接口返回 `409`。服务处理失败返回 `503` 与 `retryable=true`，不返回未经验证的客户回复。
-
-一个事实的存储格式：
-
-```json
-{
-  "value": 18,
-  "status": "confirmed",
-  "source_id": "m3",
-  "quote": "18 台",
-  "revision": 5
-}
-```
-
-这里 `revision=5` 是该事实最后一次变更的版本；完成这一轮后的画像版本为 6。
-
-## 可选：API 令牌与租户隔离
-
-这是 **2026-10-07 新增的本地展示版增强**，不代表原业务已部署该权限方案。配置环境变量 `PROFILE_AUTH_TOKENS` 为 `{租户ID: 令牌}` 的 JSON 对象即可启用。也可在测试／嵌入应用中注入 `create_app(..., auth=ApiAuth({...}))`。租户只能由服务端配置的凭证确定，不接受客户端的 `tenant_id` 或 `X-Tenant-ID` 来选择身份。
-
-以下示例在当前 shell 内随机生成一个演示凭证，值不会写入仓库。程序不自动加载 `.env`；其他终端发请求时也必须具备对应环境变量。
-
-```bash
-export PROFILE_DEMO_TOKEN="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
-export PROFILE_AUTH_TOKENS="$(python -c 'import json,os; print(json.dumps({"demo-shop":os.environ["PROFILE_DEMO_TOKEN"]}))')"
-uvicorn customer_profile_agent.api:create_app --factory --host localhost --port 8000 --workers 1
-
-# 在具备同一 PROFILE_DEMO_TOKEN 的终端请求（也可在 /docs 点击 Authorize）
-curl -s http://localhost:8000/profiles/demo-customer \
-  -H "Authorization: Bearer $PROFILE_DEMO_TOKEN"
-```
-
-- 所有 `/profiles/{customer_id}` 读取及 `/profiles/{customer_id}/turns` 写入都要求一个有效 Bearer 凭证；缺失、错误、其他认证方案或重复 Authorization 头均返回 `401`，附 `WWW-Authenticate: Bearer`。`/health` 和 API 文档公开，不返回租户或凭证。
-- 用 JSON 数组编码 `(tenant_id, customer_id)` 后进行 URL-safe Base64 编码，避免直接拼接分隔符造成歧义。客户 ID、消息 ID 相同的不同租户各自读写和重放；伪造其他租户的内部存储键也仍会被重新加上当前租户命名空间。
-- 令牌须为 32–256 个 URL-safe 字符，建议由 `secrets.token_urlsafe(32)` 生成。显式设置为空、JSON 格式错误、重复租户键、重复令牌等配置会使启动失败，不回退到无认证模式。鉴权对象仅保存令牌摘要，比较使用 `hmac.compare_digest`，凭证不传给模型或写入业务日志。
-- 开启认证后使用新命名空间，不自动迁移原来无认证演示数据。凭证变更需重启；同一租户的令牌可访问该租户全部客户。CLI／直接存储调用属于本机可信操作，不经过 HTTP 鉴权。
-- 这是小规模静态令牌鉴权，**没有 JWT、SSO、用户登录、RBAC、动态撤销或限流**；也不替代 TLS、部署配置及主机／数据库访问控制。跨主机传输 Bearer 凭证须使用 HTTPS。不要将默认无认证演示暴露到公网。
-
-复现边界验证：`python -m pytest tests/test_api_auth.py`。这些测试在 SQLite 和文件存储上验证无效凭证、同客户／消息 ID 的跨租户读写与重放、冒用租户标记、内部键注入、并发命名空间和错误配置，全部使用临时凭证与虚构数据。
-
-## 架构
-
-```mermaid
-flowchart LR
-    API[FastAPI] --> Auth[可选 Bearer 鉴权 + 租户命名空间]
-    Auth --> Agent[ProfileAgent]
-    CLI[本机 CLI] --> Agent
-    Agent <--> Provider[Mock / 可选模型 Provider]
-    Agent --> Tools[工具分派与回复校验]
-    Tools --> Patch[原文证据 + 原子 Patch]
-    Patch --> Store[(SQLite / FileStore)]
-    Store --> View[版本 + 缺失字段 + 允许的追问]
-    View --> Agent
-    Agent --> Result[已校验结果 / 本地摘要]
-    Result --> Outbox[SQLite 完成回合 + Outbox 同事务]
-    Outbox --> Dispatcher[离线 Dispatcher / 租约 + 退避]
-    Dispatcher --> Sink[虚构本地接收端 / 事件 ID 去重]
-```
-
-```text
-src/customer_profile_agent/
-├── agent.py          # 有步骤/时间上限的 Function Calling 闭环
-├── profile_store.py  # 事实 patch、审计、SQLite CAS 与消息幂等
-├── file_store.py     # Linux/macOS 文件锁与持久化替代方案
-├── policy.py         # 通用虚构询盘规则，与模型/存储解耦
-├── provider.py       # 可选的 Chat Completions 兼容传输
-├── mock_provider.py  # 无网络固定演示场景
-├── api.py            # 本地 FastAPI 接口
-├── auth.py           # 显式静态令牌配置、401 鉴权与租户命名空间
-├── outbox.py         # SQLite 交付事件、租约 fencing、离线 Dispatcher 与虚构接收端
-├── outbox_demo.py    # 接收后确认前退出、重启重复投递和幂等回执演示
-└── demo.py           # 自动演示与重复事件校验
-tests/
-├── test_core.py
-├── test_api_and_stores.py
-├── test_api_auth.py
-├── test_history.py
-└── test_outbox.py
-```
-
-## 测试
-
-```bash
+~~~bash
 python -m pytest
-```
+python -m customer_profile_agent.support_demo
+python -m customer_profile_agent.lead_scoring --report data/lead-evaluation.json
+python -m customer_profile_agent.knowledge fixtures/knowledge/synthetic-v1.json --method bm25
+python -m customer_profile_agent.evals fixtures/evals/synthetic-v1.json
+~~~
 
-测试覆盖伪造引用拒绝、整批失败不改状态、字段类型校验、旧版本写入冲突、并发 CAS、重启后读取、客户隔离、事件重试、显式中断恢复、共享规格继承、歧义数量、工具参数修复、持久化故障、API 状态码等。离线流程测试会禁止 socket 连接；可选 Provider 的 HTTP 传输使用本地 `MockTransport` 验证，不调用真实模型。
+2026-10-15 本地完整回归：**220 项测试通过，另有 18 个 subtest 通过**；完整离线集成演示通过。远端跨版本验证以对应提交的 GitHub Actions 结果为准。
 
-2026-10-07 本地组合回归 **80 项通过**：24 项核心、11 项 API／存储、34 项鉴权、11 项历史读取测试。新增 SQLite 索引与限量读取只取最近 40 条消息；保留默认全量接口和两种存储原有的空回复语义。实现、同库合成基准条件、原始样本与限制见 [历史读取说明](docs/history-benchmark.md) 和 [基准结果 JSON](docs/history-benchmark-result.json)。这项增强未部署生产。
+## API路径与角色
 
-GitHub Actions 在 Python 3.11 / 3.12 上运行测试与演示。演示版没有附带真实业务评测集，也不宣称模型准确率或生产吞吐量。
+| 路径 | 权限 |
+| --- | --- |
+| GET /profiles/{customer_id}、/history、/deliveries | viewer及以上 |
+| POST /profiles/{customer_id}/turns | agent及以上 |
+| POST /knowledge/search、/knowledge/answer | viewer及以上 |
+| PUT /knowledge/{doc_id}、DELETE /knowledge/{doc_id} | admin |
+| POST /leads/{customer_id}/score | agent及以上 |
+| GET /ops/traces、/ops/audit | admin |
 
-## 2026-10-14 新增：离线 Transactional Outbox
+历史分页使用limit和before=[created,message_id]，下一页从next_cursor继续；审计和追踪使用before_id。分页和资源查询始终取认证身份的租户。每个已认证请求返回X-Trace-ID，写操作的审计可通过同一ID关联。
 
-SQLite 后端将经过校验的 `handoff` / `escalate` 回合结果与摘要事件放在同一事务提交。单独的离线 Dispatcher 领取事件，使用租约及领取 token 拒绝旧 worker 确认，并在失败后有限退避重试。虚构本地接收端按固定 `event_id` 保存一次摘要；演示“接收成功后、确认前退出”时，重启会重复投递，但接收端回执保持一份。
+原PROFILE_AUTH_TOKENS静态租户令牌模式仍兼容，用agent权限；不能与个人RBAC模式同时启用。不配置认证时，所有接口属于仅限本机的admin演示；直接Python存储调用也是可信本机操作。
 
-状态可通过 `GET /profiles/{customer_id}/deliveries` 或 `GET /profiles/{customer_id}/deliveries/{event_id}` 读取，沿用已有 Bearer 租户隔离。回合结果中的 `delivery.status` 是创建时快照；当前状态以状态接口为准。FileStore 保持旧的本地摘要行为，明确不提供 Outbox。
+## 费用与并发配置
 
-这是**脱敏展示版新增工程练习，未部署到原业务**；没有真实发送渠道或模型调用，`external_delivery` 仍为 `false`。它演示至少一次尝试和接收端幂等，不能保证外部 exactly-once；`dead` 也不代表接收端一定没收到。原子边界、重试配置、接口与故障验证见 [Transactional Outbox 说明](docs/transactional-outbox.md)。
+可设置PROFILE_GLOBAL_CONCURRENCY、PROFILE_TENANT_CONCURRENCY、PROFILE_TOKEN_BUDGET、PROFILE_MODEL_ATTEMPTS。超过并发容量返回429和Retry-After，不无限排队。
 
-2026-10-14 本地全量回归 **95 项通过**（原有 80 项 + Outbox 15 项），原离线示例和新增故障演示均通过。CI 配置已加入新演示命令；远端验证结果以对应提交的 GitHub Actions 记录为准。
+可同时设置PROFILE_INPUT_USD_PER_MILLION、PROFILE_OUTPUT_USD_PER_MILLION，以及PROFILE_PRICING_REVISION和可选PROFILE_COST_BUDGET_USD。这些是手工输入的USD费率，不自动查询价格、不代表供应商实际账单。缺少usage、请求超时或部分失败时不会把未知费用填成0；已知费用下界仍用于预算阻断。服务端预算不能追回已发生费用，也不能保证供应商硬性账单封顶。
 
-## 可选：接入模型
+默认Mock不产生真实模型调用。显式PROFILE_MODE=live并提供PROFILE_BASE_URL、PROFILE_API_KEY、PROFILE_MODEL才调用指定的Chat Completions兼容服务；服务须支持tools与tool_choice=required，不同服务需要实际验证。未校验模型文本不会直接作为客户回复输出。
 
-默认始终是 `mock`。手动设置 `PROFILE_MODE=live`，并配置 `.env.example` 中的 `PROFILE_BASE_URL`、`PROFILE_API_KEY`、`PROFILE_MODEL`，才会向你指定的 Chat Completions 兼容服务发送对话。程序只读取环境变量，不自动读取 `.env` 或其他项目的配置。
+详见[数据库、并发与调用计量](docs/backend-and-telemetry.md)。
 
-模型服务须支持 `tools` 与 `tool_choice=required`。不同服务的兼容性需实际验证，本仓库未执行真实模型调用。不要把真实客户数据用于公开演示，也不要将密钥写入代码。
+## 项目结构
 
-## 范围与边界
+~~~text
+src/customer_profile_agent/
+  agent.py            有界工具循环、持久化结果校验、可回收客户锁
+  profile_store.py    SQLite事务、CAS、幂等、历史keyset分页
+  file_store.py       文件锁和原子替换的兼容实现
+  knowledge.py        版本化资料、租户检索、引用验证与检索评测
+  lead_scoring.py     分组训练、模型比较、JSON系数推理
+  security.py         个人身份、RBAC、撤销、审计
+  telemetry.py        无正文追踪、usage、未知费用与预算
+  concurrency.py      单进程有界准入、取消时保留线程容量
+  provider.py         可选兼容模型传输、连接复用与计量
+  api.py              统一FastAPI接口
+  evals.py            固定数据集Agent评测，默认离线
+  support_demo.py     全流程离线集成演示
+  outbox.py           本地交付事件、租约与幂等接收端
+fixtures/             明确标注的合成数据、模型及原始报告
+tests/                核心、权限、检索、分类、评测与集成回归
+~~~
 
-- 这是实际项目核心的脱敏展示版，**不是完整客户接待平台**。没有真实消息渠道、CRM、用户／角色权限管理、计费、价格查询或外部消息发送。
-- `handoff` / `escalate` 返回本地摘要对象；SQLite 还保存可供离线 Dispatcher 处理的虚构交付事件，`external_delivery` 始终为 `false`。示例不会安排运输、锁定库存或通知销售。
-- 原文引用校验能够阻止虚构证据，但不能独立证明“字段值与引用含义完全一致”；模型语义质量仍需额外评测和人工审查。自然语言问句数量和报价拦截是局部模式检查，不能保证识别全部额外问题或虚构报价。
-- 适合本机单进程演示。存储 CAS 能拒绝并发覆盖；它不等于分布式任务队列，也不保证同一客户的不同事件在多实例下按业务顺序执行。进程内客户锁暂未做容量淘汰。
-- 事实 patch 与整轮完成分别持久化，未伪装成一笔跨模型调用的大事务。失败前已经落盘的事实会保留；完成事件的重试幂等，失败重试则基于已保存状态继续处理。
-- 如果进程在事件处理中退出，该事件保持 `running`。确认原工作进程已停止后，可在运维代码中调用 `store.recover_turn(customer_id, message_id)` 再重试；不会按超时自动抢占仍可能存活的工作进程。
-- API 默认无认证、运行命令只监听本机；显式设置 `PROFILE_AUTH_TOKENS` 才启用上述静态令牌与租户隔离，尚未在生产部署验证。文件存储依赖 `fcntl`，适用于 Linux/macOS。
+原[历史读取基准](docs/history-benchmark.md)和[Outbox原子边界](docs/transactional-outbox.md)仍保留。原文证据只能验证引用确实存在，不能独立证明字段与原文语义一致；大模型语义质量仍须在标注集上另测。同步SQLite操作和单进程限额适合本地工程展示，不代表生产多实例容量或部署验证。
 
-### 代码来源与整理说明
+## 来源
 
-`profile_store.py`、`file_store.py`、工具闭环及一部分单元测试整理自原客户接待项目对应模块。此版本保留通用的画像更新与存储逻辑，重写业务提示词和示例规则，删除品牌、真实地点、费率、旧配置回退及平台耦合。FastAPI、离线 Mock、演示入口、部分测试和 CI 为本次整理新增。
+画像patch、部分存储及工具循环整理自原客户接待项目；FastAPI入口、合成演示、CI、静态鉴权、Outbox和本次新增模块为脱敏工程增强。公开版本未包含公司配置、真实客户会话、私有资料或生产账号，也未声明新增能力已用于原业务。
 
-此仓库未附加开源许可证；公开展示不代表额外授予使用、分发或再授权许可。
+本仓库未附加开源许可证；公开展示不代表额外授予使用、分发或再授权许可。

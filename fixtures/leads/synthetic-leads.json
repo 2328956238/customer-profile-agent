@@ -1,0 +1,4045 @@
+{
+  "dataset_seed": 20261015,
+  "label_definitions": {
+    "high": "合成场景：较具体的近期采购询盘，建议优先查看",
+    "low": "合成场景：初步了解产品，需求尚不具体",
+    "medium": "合成场景：比较规格与条件，需求逐渐具体"
+  },
+  "provenance": "2026-10-15 公开脱敏展示版新增；程序生成的虚构客户与人工定义场景标签，无真实客户或成交记录。",
+  "rows": [
+    {
+      "customer_id": "demo-customer-001",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-001-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-001",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-001-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-002",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-002-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-002",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-002-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-003",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-003-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-003",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-003-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-004",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-004-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-004",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-004-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-005",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 2,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-005-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-005",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-005-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-006",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-006-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-006",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 14,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-006-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-007",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-007-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-007",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-007-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-008",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-008-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-008",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-008-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-009",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-009-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-009",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-009-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-010",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-010-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-010",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-010-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-011",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-011-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-011",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-011-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-012",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-012-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-012",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-012-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-013",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-013-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-013",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-013-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-014",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-014-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-014",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-014-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-015",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-015-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-015",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-015-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-016",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-016-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-016",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-016-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-017",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 20,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-017-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-017",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 20,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-017-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-018",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-018-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-018",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-018-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-019",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-019-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-019",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-019-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-020",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 20,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-020-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-020",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 20,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-020-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-021",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 16,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-021-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-021",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 19,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-021-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-022",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-022-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-022",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-022-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-023",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-023-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-023",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-023-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-024",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-024-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-024",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-024-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-025",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-025-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-025",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-025-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-026",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-026-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-026",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-026-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-027",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-027-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-027",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 14,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-027-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-028",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-028-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-028",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-028-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-029",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-029-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-029",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-029-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-030",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-030-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-030",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-030-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-031",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-031-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-031",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-031-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-032",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-032-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-032",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-032-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-033",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 13,
+        "requested_quantity": 20,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-033-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-033",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 16,
+        "requested_quantity": 20,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-033-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-034",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-034-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-034",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-034-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-035",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-035-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-035",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-035-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-036",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-036-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-036",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-036-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-037",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-037-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-037",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-037-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-038",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-038-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-038",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-038-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-039",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-039-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-039",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-039-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-040",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-040-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-040",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-040-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-041",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-041-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-041",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-041-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-042",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-042-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-042",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-042-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-043",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-043-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-043",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-043-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-044",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-044-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-044",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-044-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-045",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 200,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-045-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-045",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 200,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-045-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-046",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-046-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-046",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-046-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-047",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-047-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-047",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-047-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-048",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-048-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-048",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-048-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-049",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-049-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-049",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-049-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-050",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-050-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-050",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-050-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-051",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-051-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-051",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-051-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-052",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-052-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-052",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-052-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-053",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-053-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-053",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-053-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-054",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-054-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-054",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-054-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-055",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-055-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-055",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-055-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-056",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 20,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-056-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-056",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 20,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-056-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-057",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 16,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-057-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-057",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 19,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-057-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-058",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-058-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-058",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-058-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-059",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-059-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-059",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-059-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-060",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 100,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-060-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-060",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 13,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-060-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-061",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-061-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-061",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-061-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-062",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-062-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-062",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-062-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-063",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-063-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-063",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-063-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-064",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-064-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-064",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-064-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-065",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-065-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-065",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-065-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-066",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 14,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-066-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-066",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 16,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-066-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-067",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-067-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-067",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-067-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-068",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 2,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-068-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-068",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-068-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-069",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 200,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-069-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-069",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 200,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-069-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-070",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-070-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-070",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-070-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-071",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-071-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-071",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 15,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-071-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-072",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-072-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-072",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 100,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-072-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-073",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-073-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-073",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-073-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-074",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-074-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-074",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-074-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-075",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 100,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-075-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-075",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-075-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-076",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-076-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-076",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-076-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-077",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-077-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-077",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-077-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-078",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-078-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-078",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-078-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-079",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-079-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-079",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-079-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-080",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-080-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-080",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 15,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-080-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-081",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-081-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-081",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-081-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-082",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-082-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-082",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-082-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-083",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-083-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-083",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 13,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-083-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-084",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-084-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-084",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-084-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-085",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-085-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-085",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-085-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-086",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 100,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-086-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-086",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 100,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-086-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-087",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-087-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-087",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-087-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-088",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 20,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-088-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-088",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-088-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-089",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-089-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-089",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-089-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-090",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-090-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-090",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-090-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-091",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-091-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-091",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 11,
+        "requested_quantity": 20,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-091-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-092",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-092-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-092",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-092-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-093",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-093-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-093",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 100,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-093-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-094",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-094-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-094",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-094-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-095",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-095-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-095",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 100,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-095-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-096",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 200,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-096-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-096",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 10,
+        "requested_quantity": 200,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-096-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-097",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-097-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-097",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-097-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-098",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-098-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-098",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-098-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-099",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-099-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-099",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 16,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-099-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-100",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-100-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-100",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-100-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-101",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-101-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-101",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 13,
+        "requested_quantity": 10,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-101-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-102",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 20,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-102-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-102",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 20,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-102-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-103",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-103-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-103",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 20,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-103-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-104",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-104-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-104",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 14,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-104-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-105",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-105-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-105",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 15,
+        "requested_quantity": 0,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-105-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-106",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-106-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-106",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-106-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-107",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-107-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-107",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-107-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-108",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 16,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-108-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-108",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 17,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-108-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-109",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-109-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-109",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-109-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-110",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-110-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-110",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-110-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-111",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-111-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-111",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-111-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-112",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-112-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-112",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-112-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-113",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-113-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-113",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-113-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-114",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 200,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-114-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-114",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 200,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-114-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-115",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-115-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-115",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-115-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-116",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-116-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-116",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-116-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-117",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-117-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-117",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-117-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-118",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 3,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-118-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-118",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-118-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-119",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-119-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-119",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 100,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-119-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-120",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-120-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-120",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-120-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-121",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-121-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-121",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 5,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-121-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-122",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-122-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-122",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 20,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-122-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-123",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-123-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-123",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 15,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-123-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-124",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 1,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-124-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-124",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-124-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-125",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 12,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-125-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-125",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 15,
+        "requested_quantity": 10,
+        "specified_attribute_count": 0
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-125-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-126",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 200,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-126-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-126",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 8,
+        "requested_quantity": 200,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-126-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-127",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-127-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-127",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-127-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-128",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-128-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-128",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 13,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-128-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-129",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-129-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-129",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 20,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-129-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-130",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-130-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-130",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-130-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-131",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 9,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-131-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-131",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 10,
+        "requested_quantity": 10,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-131-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-132",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-132-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-132",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 14,
+        "requested_quantity": 20,
+        "specified_attribute_count": 1
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-132-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-133",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-133-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-133",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 8,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-133-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-134",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-134-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-134",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 50,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-134-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-135",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 11,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-135-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-135",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 13,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-135-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-136",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-136-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-136",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-136-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-137",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 12,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-137-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-137",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 14,
+        "requested_quantity": 10,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-137-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-138",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 4,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-138-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-138",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 50,
+        "specified_attribute_count": 4
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-138-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-139",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-139-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-139",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": false,
+        "has_purchase_timeframe": false,
+        "message_count": 4,
+        "requested_quantity": 5,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-139-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-140",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 6,
+        "requested_quantity": 5,
+        "specified_attribute_count": 4
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-140-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-140",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 7,
+        "requested_quantity": 5,
+        "specified_attribute_count": 3
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-140-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-141",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 14,
+        "requested_quantity": 100,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-141-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-141",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 17,
+        "requested_quantity": 100,
+        "specified_attribute_count": 2
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-141-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-142",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 2,
+        "requested_quantity": 10,
+        "specified_attribute_count": 1
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-142-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-142",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": true,
+        "has_purchase_timeframe": false,
+        "message_count": 3,
+        "requested_quantity": 10,
+        "specified_attribute_count": 0
+      },
+      "label": "low",
+      "snapshot_id": "demo-customer-142-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-143",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 7,
+        "requested_quantity": 50,
+        "specified_attribute_count": 1
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-143-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-143",
+      "features": {
+        "asks_price": true,
+        "asks_shipping": false,
+        "has_destination": false,
+        "has_purchase_timeframe": true,
+        "message_count": 9,
+        "requested_quantity": 50,
+        "specified_attribute_count": 2
+      },
+      "label": "medium",
+      "snapshot_id": "demo-customer-143-inquiry-2"
+    },
+    {
+      "customer_id": "demo-customer-144",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 5,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-144-inquiry-1"
+    },
+    {
+      "customer_id": "demo-customer-144",
+      "features": {
+        "asks_price": false,
+        "asks_shipping": true,
+        "has_destination": true,
+        "has_purchase_timeframe": true,
+        "message_count": 6,
+        "requested_quantity": 0,
+        "specified_attribute_count": 3
+      },
+      "label": "high",
+      "snapshot_id": "demo-customer-144-inquiry-2"
+    }
+  ],
+  "schema_version": 1,
+  "synthetic": true
+}
