@@ -58,7 +58,7 @@ python -m customer_profile_agent.knowledge fixtures/knowledge/synthetic-v1.json 
 python -m customer_profile_agent.evals fixtures/evals/synthetic-v1.json
 ~~~
 
-2026-10-15 本地完整回归：**220 项测试通过，另有 18 个 subtest 通过**；完整离线集成演示通过。远端跨版本验证以对应提交的 GitHub Actions 结果为准。
+2026-10-15 本地完整回归：**221 项测试通过，另有 18 个 subtest 通过**；完整离线集成演示通过。远端跨版本验证以对应提交的 GitHub Actions 结果为准。
 
 ## API路径与角色
 
@@ -82,6 +82,8 @@ python -m customer_profile_agent.evals fixtures/evals/synthetic-v1.json
 可同时设置PROFILE_INPUT_USD_PER_MILLION、PROFILE_OUTPUT_USD_PER_MILLION，以及PROFILE_PRICING_REVISION和可选PROFILE_COST_BUDGET_USD。这些是手工输入的USD费率，不自动查询价格、不代表供应商实际账单。缺少usage、请求超时或部分失败时不会把未知费用填成0；已知费用下界仍用于预算阻断。服务端预算不能追回已发生费用，也不能保证供应商硬性账单封顶。
 
 默认Mock不产生真实模型调用。显式PROFILE_MODE=live并提供PROFILE_BASE_URL、PROFILE_API_KEY、PROFILE_MODEL才调用指定的Chat Completions兼容服务；服务须支持tools与tool_choice=required，不同服务需要实际验证。未校验模型文本不会直接作为客户回复输出。
+
+知识问答另由PROFILE_KNOWLEDGE_MODE控制，默认extractive完全离线。显式设为live并提供同一组模型配置时，执行“租户检索→模型选取证据摘录→引用/版本/逐行摘录验证”，校验失败返回abstain。该路径要求服务支持JSON对象响应；资料及问题都作为不可信数据传入，不赋予模型写库或其他工具权限。模型、检索耗时与usage归入同一请求trace。本轮只用本地MockTransport验证接入，没有调用付费模型，也未取得真实模型质量结果。
 
 详见[数据库、并发与调用计量](docs/backend-and-telemetry.md)。
 

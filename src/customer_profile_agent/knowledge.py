@@ -4,6 +4,7 @@ This is an offline portfolio module, not a semantic embedding service. Knowledge
 references have their own namespace and never become customer-message evidence.
 """
 import asyncio
+from .telemetry import observe_retrieval
 import copy
 import hashlib
 import inspect
@@ -221,6 +222,7 @@ class KnowledgeBase:
             rows = self._rows(db, tenant_id, citation_id)
         return self._evidence(rows[0]) if rows else None
 
+    @observe_retrieval
     def search(self, tenant_id, query, top_k=3, *, method='bm25'):
         _string(tenant_id, 'tenant_id', 100)
         _string(query, 'query', 2000, allow_blank=True)
@@ -285,28 +287,30 @@ class KnowledgeBase:
         provider.answer(question, evidence) returns {answer: str, citations: list}.
         Sync and async providers are supported. No provider is created implicitly.
         """
+        from .concurrency import run_blocking
+
         if provider is None:
-            return self.extractive_answer(tenant_id, query, top_k, method=method)
+            return await run_blocking(self.extractive_answer, tenant_id, query, top_k, method=method)
         if (isinstance(provider_timeout, bool) or not isinstance(provider_timeout, (int, float))
                 or not math.isfinite(provider_timeout) or provider_timeout <= 0):
             raise ValueError('provider_timeout must be finite and positive')
-        result = self.search(tenant_id, query, top_k, method=method)
+        result = await run_blocking(self.search, tenant_id, query, top_k, method=method)
         if not result['hits']:
             return self._abstain('no_matching_evidence')
         try:
-            # Sync providers must also respect their own I/O deadlines: a cancelled
-            # thread cannot forcibly interrupt third-party blocking code.
+            # Keep caller-owned admission until blocking work really finishes;
+            # a timeout cannot forcibly interrupt a synchronous provider's I/O.
             callback = provider.answer
             if inspect.iscoroutinefunction(callback):
                 pending = callback(query, copy.deepcopy(result['hits']))
             else:
-                pending = asyncio.to_thread(callback, query, copy.deepcopy(result['hits']))
+                pending = run_blocking(callback, query, copy.deepcopy(result['hits']))
             response = await asyncio.wait_for(pending, provider_timeout)
             if inspect.isawaitable(response):
                 response = await asyncio.wait_for(response, provider_timeout)
         except Exception:
             return self._abstain('provider_unavailable')
-        return self._validate_answer(tenant_id, response, result['hits'])
+        return await run_blocking(self._validate_answer, tenant_id, response, result['hits'])
 
 
 def evaluate_dataset(dataset, *, top_k=3, method='bm25'):

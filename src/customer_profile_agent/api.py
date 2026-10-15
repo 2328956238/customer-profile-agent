@@ -53,7 +53,8 @@ def demo_scorer():
     from .lead_scoring import train_demo_model
     return train_demo_model()
 
-def create_app(store=None, provider=None, auth=None, *, security=None, knowledge=None, scorer=None, admission=None):
+def create_app(store=None, provider=None, auth=None, *, security=None, knowledge=None, scorer=None,
+               admission=None, knowledge_provider=None):
     auth = ApiAuth.from_env() if auth is None else auth
     mode = os.getenv('PROFILE_ACCESS_MODE', 'legacy')
     if mode not in ('legacy', 'rbac'):
@@ -74,6 +75,11 @@ def create_app(store=None, provider=None, auth=None, *, security=None, knowledge
             raise RuntimeError('PROFILE_MODE must be mock or live')
         provider = Provider.configured() if provider_mode == 'live' else MockProvider()
     agent = ProfileAgent(store, provider)
+    knowledge_mode = os.getenv('PROFILE_KNOWLEDGE_MODE', 'extractive')
+    if knowledge_mode not in ('extractive', 'live'):
+        raise RuntimeError('PROFILE_KNOWLEDGE_MODE must be extractive or live')
+    if knowledge_provider is None and knowledge_mode == 'live':
+        knowledge_provider = Provider.configured()
     options = {'max_tokens': int(os.getenv('PROFILE_TOKEN_BUDGET', '12000')),
                'max_attempts': int(os.getenv('PROFILE_MODEL_ATTEMPTS', '20')),
                'pricing_revision': os.getenv('PROFILE_PRICING_REVISION', 'unconfigured')[:100]}
@@ -94,6 +100,8 @@ def create_app(store=None, provider=None, auth=None, *, security=None, knowledge
         finally:
             if hasattr(provider, 'aclose'):
                 await provider.aclose()
+            if knowledge_provider is not provider and hasattr(knowledge_provider, 'aclose'):
+                await knowledge_provider.aclose()
     app = FastAPI(title='Customer Support Engineering Demo', version='0.2.0', lifespan=lifespan,
                   description='Synthetic support demo; RBAC, knowledge, classification and traces. Offline by default.')
     app.state.agent, app.state.security, app.state.knowledge = agent, security_store, knowledge
@@ -172,6 +180,7 @@ def create_app(store=None, provider=None, auth=None, *, security=None, knowledge
     @app.get('/health')
     def health():
         return {'status':'ok', 'provider':type(provider).__name__,
+                'knowledge_provider':type(knowledge_provider).__name__ if knowledge_provider else 'offline-extractive',
                 'auth':'individual-rbac' if rbac else 'tenant-token' if auth.enabled else 'local-demo-unprotected'}
 
     @app.get('/profiles/{customer_id}')
@@ -247,6 +256,8 @@ def create_app(store=None, provider=None, auth=None, *, security=None, knowledge
     @app.post('/knowledge/answer')
     async def knowledge_answer(body: KnowledgeQuestion, principal=Depends(permission('knowledge:read'))):
         async with admission.enter(principal.tenant_id):
+            if knowledge_provider is not None:
+                return await knowledge.answer(principal.tenant_id, body.query, provider=knowledge_provider)
             return await run_blocking(knowledge.extractive_answer, principal.tenant_id, body.query)
 
     @app.post('/leads/{customer_id}/score')

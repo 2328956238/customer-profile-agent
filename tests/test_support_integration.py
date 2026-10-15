@@ -271,3 +271,36 @@ def test_huge_pagination_values_are_rejected_before_sqlite(tmp_path):
         security.list_audit('shop',before_id=10**100)
     with pytest.raises(ValueError):
         TraceStore(store.path).page('shop',before_id=10**100)
+
+
+def test_grounded_model_adapter_integrates_knowledge_and_metering_without_network(tmp_path,monkeypatch):
+    requests = []
+    def respond(request):
+        body = json.loads(request.content)
+        requests.append(body)
+        evidence = json.loads(body['messages'][1]['content'])['evidence'][0]
+        content = json.dumps({'answer':evidence['text'],'citations':[evidence['citation_id']]})
+        return httpx.Response(200,json={'usage':{'prompt_tokens':120,'completion_tokens':30},
+                              'choices':[{'message':{'role':'assistant','content':content}}]})
+    monkeypatch.setenv('PROFILE_INPUT_USD_PER_MILLION','2')
+    monkeypatch.setenv('PROFILE_OUTPUT_USD_PER_MILLION','4')
+    real = httpx.AsyncClient
+    async def run():
+        model = Provider('https://example.invalid/v1','fictional-key','fictional-model')
+        app = create_app(Store(tmp_path/'support.db'),MockProvider(),knowledge_provider=model)
+        app.state.knowledge.upsert('local-demo','shipping','v1','Shipping','Standard shipping takes eight days.')
+        async with real(transport=httpx.ASGITransport(app=app),base_url='http://local') as client:
+            response = await client.post('/knowledge/answer',json={'query':'standard shipping'})
+            assert response.json()['status'] == 'answered'
+            assert response.json()['answer'] == 'Standard shipping takes eight days.'
+            traces = (await client.get('/ops/traces')).json()['items']
+            trace = next(r for r in traces if r['trace_id']==response.headers['X-Trace-ID'])
+            assert trace['usage']['model_attempts'] == 1
+            assert trace['usage']['input_tokens'] == 120
+            assert any(span['kind']=='retrieval' for span in trace['usage']['spans'])
+        await model.aclose()
+    with patch('customer_profile_agent.provider.httpx.AsyncClient',
+               side_effect=lambda **kw: real(transport=httpx.MockTransport(respond),**kw)):
+        asyncio.run(run())
+    assert requests[0]['response_format'] == {'type':'json_object'}
+    assert 'tools' not in requests[0]

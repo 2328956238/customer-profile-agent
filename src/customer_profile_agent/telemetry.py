@@ -3,6 +3,7 @@ from contextvars import ContextVar
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from decimal import Decimal
+from functools import wraps
 import json
 import sqlite3
 import time
@@ -10,6 +11,22 @@ import uuid
 
 
 current_trace = ContextVar('support_trace', default=None)
+
+
+def observe_retrieval(callback):
+    @wraps(callback)
+    def measured(*args, **kwargs):
+        started, result = time.monotonic(), None
+        try:
+            result = callback(*args, **kwargs)
+            return result
+        finally:
+            trace = current_trace.get()
+            if trace is not None:
+                trace.spans.append({'span_id':uuid.uuid4().hex,'parent_id':trace.trace_id,
+                    'kind':'retrieval','elapsed_ms':round((time.monotonic()-started)*1000,3),
+                    'ok':result is not None, 'hit_count':len(result['hits']) if result else 0})
+    return measured
 
 
 class BudgetExceeded(RuntimeError):

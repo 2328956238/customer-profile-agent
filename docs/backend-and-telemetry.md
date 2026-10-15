@@ -49,6 +49,8 @@ HTTP 响应带有 `X-Trace-ID`。已经建立身份的请求在结束时把状�
 
 trace 的 model span 保存模型名、耗时、已知 usage、HTTP 状态分类或异常类型；重试中的失败尝试也各占一个 span。tool span 只接受 `read_profile`、`update_profile`、`finish_turn` 三个名称，未知名称写成 `unknown_tool`，并记录耗时、成功与否。它们以请求 trace ID 为父级，是本地的简单观测结构，没有 OpenTelemetry 导出服务、Prometheus 指标服务或跨进程链路传播。
 
+知识库检索另记 retrieval span，只含耗时、是否成功和命中数，不包含问题、文档正文或来源片段。可选模型选摘录与该检索共用请求 trace。
+
 这里的 `/ops/traces` **不保存提示词、消息正文、工具参数、回答、API key、Bearer Token 或原始异常文本**。注意它与回合响应里的 `tool_trace` 不同：后者是业务调试/证据数据，可以含工具参数；业务画像、历史和回合表本身也保存内容。不能由“观测表无正文”推导出整个数据库不含业务数据。
 
 trace 写入与业务提交不是同一事务；进程退出、数据库故障等可能造成缺失。它不是完整计费账本，也没有实现留存期清理、外部告警或防篡改归档。身份和权限说明见 [security.md](security.md)：当前是服务器管理的个人 opaque Token 或兼容租户 Token，不是 SSO、OAuth 登录或企业身份服务。
@@ -78,6 +80,7 @@ Provider 的 `httpx.AsyncClient` 延迟创建并复用，应用退出时关闭�
 | --- | --- |
 | `PROFILE_DB` | `data/profiles.sqlite3` |
 | `PROFILE_MODE` | `mock`；可选 `live`，演示和测试使用 mock |
+| `PROFILE_KNOWLEDGE_MODE` | `extractive`；显式 `live` 使用配置模型选摘录，再校验引用和当前文档版本 |
 | `PROFILE_BASE_URL`、`PROFILE_API_KEY`、`PROFILE_MODEL` | 只有 live 模式需要，必须同时提供；不放入文档示例或版本库 |
 | `PROFILE_ACCESS_MODE` | `legacy`；`rbac` 使用个人身份库 |
 | `PROFILE_AUTH_TOKENS` | 可选兼容租户凭证映射；不能与 RBAC 同时启用，格式见认证文档 |
